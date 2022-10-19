@@ -263,3 +263,10 @@ Não preciso nem dizer que é praticamente inviável e é exatamente por isso qu
         
         
 Além de parar os contêineres o Docker Compose também interrompe a rede. 
+
+
+# Referência:
+
+GOMES, Rafael. Docker para desenvolvedores. 2020. Disponível em: https://stack.desenvolvedor.expert/appendix/docker/oquee.html. Acesso em: 17 out. 2022.
+
+Docker site oficial. Instale o Docker Desktop no Windows. 2022. Disponível em: https://docs.docker.com/desktop/install/windows-install/ . Acesso em: 18 out. 2022.
