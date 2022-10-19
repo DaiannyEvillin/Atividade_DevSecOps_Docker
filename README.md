@@ -266,7 +266,8 @@ Não preciso nem dizer que é praticamente inviável e é exatamente por isso qu
 Além de parar os contêineres o Docker Compose também interrompe a rede. 
 
 
-# Referência:
+# Referências:
+
 
 GOMES, Rafael. Docker para desenvolvedores. 2020. Disponível em: https://stack.desenvolvedor.expert/appendix/docker/oquee.html. Acesso em: 17 out. 2022.
 
