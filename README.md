@@ -121,7 +121,7 @@ Você pode verificar isso clicando em Sobre o Docker Desktop no menu Docker.
 
 Crie um arquivo chamado docker-compose.yml no Visual Code no seu Windows.
 
-Dentro desse arquivo iremos definir a versão do docker-compose.yml no nosso está a versão 3.4. 
+Dentro desse arquivo iremos definir a versão do docker-compose.yml no nosso está a versão 3.9. 
 
 Em seguida adicione a propriedade services. É nela que definimos os serviços que a nossa stack terá, simplificando muito podemos dizer que cada serviço equivale a um contêiner. No nosso teremos os serviços db e wordpress conforme o código abaixo. Um detalhe muito importante é não usar TABS, se não usarmos apenas espaços e formatarmos corretamente o nosso arquivo não será interpretado corretamente e por consequência não irá executar.
 
