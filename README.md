@@ -110,3 +110,70 @@ Assinaturas pagas também são necessárias para entidades governamentais.
    ● As assinaturas Docker Pro, Team e Business incluem o uso comercial do Docker Desktop.
 
 3. Selecione Aceitar para continuar. O Docker Desktop é iniciado depois que você aceita os termos.
+
+# Instalar o Docker Compose.
+
+Se você tiver o Docker Desktop, terá uma instalação completa do Docker, incluindo o Compose.
+
+Você pode verificar isso clicando em Sobre o Docker Desktop no menu Docker. 
+
+# Subir uma aplicação WordPress + DB MySQL.
+
+Crie um arquivo chamado docker-compose.yml no Visual Code no seu Windows.
+
+Dentro desse arquivo iremos definir a versão do docker-compose.yml no nosso está a versão 3.4. 
+
+Em seguida adicione a propriedade services. É nela que definimos os serviços que a nossa stack terá, simplificando muito podemos dizer que cada serviço equivale a um contêiner. No nosso teremos os serviços db e wordpress conforme o código abaixo. Um detalhe muito importante é não usar TABS, se não usarmos apenas espaços e formatarmos corretamente o nosso arquivo não será interpretado corretamente e por consequência não irá executar.
+
+Agora definimos cada um dos nossos serviços vamos começar pelo db. 
+
+Primeiro vamos escolher a Docker image a partir da qual o serviço/contêiner será inicializado no nosso caso o mysql:latest. Nesse caso iremos usar a tag latest (última versão estável da Docker image). 
+
+Depois iremos definir uma propriedade command que funciona de modo similar à instrução COMMAND do Dockerfile. No nosso estamos usando o command para inicializar o MySQL no modo de autenticação nativo. Sem isso não conseguiríamos logar no nosso SGBD MySQL.
+ 
+Em seguida vamos definir através de quais portas iremos acessar o MySQL. No meu caso 3306 no contêiner e 3308 no host, escolhi a 3308 por que na minha máquina eu tenho o MySQL instalado e se eu deixasse a 3306 ocorreria um conflito de portas.
+
+Após isso vamos manter o db assim e vamos configurar o serviço do wordpress.
+
+Primeiro vamos especificar a Docker image no nosso caso wordpress:latest. Mesmo que omitíssemos a TAG a latest seria baixada por padrão. Se quiséssemos poderíamos especificar uma TAG específica. Em seguida definimos as portas que no caso será a 80 tanto no contêiner quanto no host (minha máquina). No mesmo alinhamento de image e ports vamos adicionar uma nova propriedade chamada depends_on. Essa propriedade indica ao Docker Compose que o serviço do wordpress depende do serviço do db e por isso ele deve iniciar o db primeiro.
+
+Agora vamos avançar um pouco mais e vamos ultilizar as propriedades environment e volumes. Environment como o próprio nome diz serve para definirmos valores de variáveis de ambiente dentro do contêiner. A maioria das variáveis são auto evidentes, mas algumas merecem uma explicação especial. A variável TZ serve para definirmos o TimeZone em que o contêiner está sendo executado. Se você está no Brasil com exceção de uns poucos estados seu timezone provavelmente será America/Sao_Paulo. A variável MYSQL_ROOT_PASSWORD é obrigatória e sua stack não irá subir sem ela. Ela é usada para definirmos a senha do usuário root do MySQL. As demais acredito que sejam auto explicativas. Em seguida temos os volumes que sendo bem simplista, é como se fosse um mapeamento de um diretório dentro de um contêiner com um diretório no host. No nosso caso o serviço do MySQL tem um volume e o serviço do WordPress tem dois volumes.
+
+Apesar de o Docker Compose já criar uma rede default entre os contêineres/serviços por questões de prática nomearemos uma rede. Pra isso adicione a propriedade networks no mesmo alinhamento de services. O nome da nossa rede será wordpress-network e ela será inicializada em modo bridge. Feito isto basta adicionarmos a propriedade networks em cada serviço. Essa propriedade deve ficar no mesmo alinhamento que ports e environment e nela podemos definir uma ou mais redes. No nosso caso teremos apenas a rede wordpress-network.
+
+Feito isto toda a nossa stack está configurada e já podemos executá-la.
+
+Abaixo se encontra o arquivo docker-compose.yml que criamos:
+
+
+# Executando nosso arquivo .yml.
+
+Nosso próximo passo é acessar o diretório desse arquivo e abrir o terminal (se não for no mesmo diretório do arquivo não irá funcionar). Com o terminal aberto digite o comando
+ 
+        docker-compose up -d 
+
+para que o Docker Compose inicialize a stack. O parâmetro -d é opcional e é usado para que o Docker Compose inicie de modo detachado e libere o terminal pra que possamos continuar usando. Esse processo pode levar alguns minutos já que ele irá baixar as Docker images e inicializar os contêineres, algo que pode demorar dependendo da sua internet e de seu hardware.
+
+Podemos ir direto ao navegador e conferir se tudo deu certo, mas antes vamos conhecer o comando 
+
+        docker-compose ps 
+
+que lista os contêineres da stack em execução. Um detalhe fundamental é que todos os comandos do Docker compose precisam ser executados no mesmo diretório em que está o arquivo docker-compose.yml ou não funcionará. 
+Se o estado contêiner for igual a up então significa que está funcionando.
+
+# Interromper a Stack.
+
+Imagine interromper uma stack com dezenas de contêineres usando o comando
+
+
+
+        docker stop
+ 
+ 
+Não preciso nem dizer que é praticamente inviável e é exatamente por isso que existe o comando docker-compose down. Dito isto vamos encerrar a nossa stack, pra isso digite o comando:
+ 
+ 
+        docker-compose down
+        
+        
+Além de parar os contêineres o Docker Compose também interrompe a rede. 
