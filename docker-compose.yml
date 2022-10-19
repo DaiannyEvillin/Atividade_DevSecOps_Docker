@@ -34,7 +34,6 @@ services: #definimos os serviços que a nossa stack terá. No nosso teremos os s
       
   adminer:
     image: adminer:latest
-    container_name: compose-adminer
     depends_on: #Essa propriedade indica ao Docker Compose que o serviço do wordpress depende do serviço do db e por isso ele deve iniciar o db primeiro.
       - mysql
     ports:
