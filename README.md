@@ -229,7 +229,7 @@ Nosso próximo passo é acessar o diretório desse arquivo e abrir o terminal (s
 
 para que o Docker Compose inicialize a stack. O parâmetro -d é opcional e é usado para que o Docker Compose inicie de modo detachado e libere o terminal pra que possamos continuar usando. Esse processo pode levar alguns minutos já que ele irá baixar as Docker images e inicializar os contêineres, algo que pode demorar dependendo da sua internet e de seu hardware.
 
-Podemos ir direto ao navegador e conferir se tudo deu certo, mas antes vamos conhecer o comando 
+Podemos ir direto ao navegador e conferir se tudo deu certo, mas vamos apenas usar o comando 
 
         docker-compose ps 
 
