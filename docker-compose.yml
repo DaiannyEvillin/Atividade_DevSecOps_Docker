@@ -1,5 +1,5 @@
 version: '3.9' #versão do docker-compose.yml
-services: #definimos os serviços que a nossa stack terá. No nosso teremos os serviços db e wordpress conforme o código abaixo.
+services: #definimos os serviços que a nossa stack terá. No nosso teremos os serviços db, wordpress e adminer conforme o código abaixo.
   db:
     image: mysql:latest #Docker image a partir da qual o serviço/contêiner será inicializado no nosso caso o mysql:latest. Nesse caso iremos usar a tag latest (última versão estável da Docker image).
     volumes:
