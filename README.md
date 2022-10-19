@@ -210,7 +210,18 @@ Abaixo se encontra o arquivo docker-compose.yml que criamos:
         networks:
 
           - wordpress-network
-
+          
+       adminer:
+       
+        image: adminer:latest
+        
+        depends_on: 
+        
+          - mysql
+          
+        ports:
+        
+          - 4040:8080
  
 
     networks:
