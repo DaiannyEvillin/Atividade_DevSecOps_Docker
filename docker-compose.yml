@@ -31,7 +31,15 @@ services: #definimos os serviços que a nossa stack terá. No nosso teremos os s
       - 80:80
     networks:
       - wordpress-network
- 
+      
+  adminer:
+    image: adminer:4.8.1
+    container_name: compose-adminer
+    depends_on:
+      - mysql
+    ports:
+      - 4040:8080    
+      
 networks:
     wordpress-network:
       driver: bridge
