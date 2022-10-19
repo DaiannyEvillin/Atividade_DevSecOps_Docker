@@ -211,6 +211,7 @@ Abaixo se encontra o arquivo docker-compose.yml que criamos:
 
           - wordpress-network
           
+          
        adminer:
        
         image: adminer:latest
