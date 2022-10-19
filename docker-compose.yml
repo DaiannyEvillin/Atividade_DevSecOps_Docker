@@ -13,7 +13,7 @@ services: #definimos os serviços que a nossa stack terá. No nosso teremos os s
       MYSQL_DATABASE: wordpress
     ports:  #portas de acesso.
       - 3308:3306
-    networks:
+    networks: #rede default.
       - wordpress-network
  
   wordpress:
