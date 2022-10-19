@@ -145,6 +145,81 @@ Feito isto toda a nossa stack está configurada e já podemos executá-la.
 
 Abaixo se encontra o arquivo docker-compose.yml que criamos:
 
+    version: '3.9'
+
+    services:
+
+      db:
+
+        image: mysql:latest
+
+        volumes:
+
+          - db_data:/var/lib/mysql
+
+        command: mysqld --default_authentication_plugin=mysql_native_password
+
+        environment:
+
+          TZ: America/Sao_Paulo
+
+          MYSQL_ROOT_PASSWORD: docker
+
+          MYSQL_USER: docker
+
+          MYSQL_PASSWORD: docker
+
+          MYSQL_DATABASE: wordpress
+
+        ports:
+
+          - 3308:3306
+
+        networks:
+
+          - wordpress-network
+
+ 
+
+       wordpress:
+
+        image: wordpress:latest
+
+        volumes:
+
+          - ./config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
+          - ./wp-app:/var/www/html
+
+        environment:
+
+          TZ: America/Sao_Paulo
+
+          WORDPRESS_DB_HOST: db
+
+          WORDPRESS_DB_NAME: wordpress
+
+          WORDPRESS_DB_USER: root
+
+          WORDPRESS_DB_PASSWORD: docker
+
+        ports:
+
+          - 80:80
+
+        networks:
+
+          - wordpress-network
+
+ 
+
+    networks:
+
+        wordpress-network:
+
+          driver: bridge
+
+
 
 # Executando nosso arquivo .yml.
 
