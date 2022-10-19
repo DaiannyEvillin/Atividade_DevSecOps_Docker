@@ -1,17 +1,17 @@
-version: '3.9'
-services:
+version: '3.9' // versão do docker-compose.yml
+services: // definimos os serviços que a nossa stack terá. No nosso teremos os serviços db e wordpress conforme o código abaixo.
   db:
-    image: mysql:latest
+    image: mysql:latest // Docker image a partir da qual o serviço/contêiner será inicializado no nosso caso o mysql:latest. Nesse caso iremos usar a tag latest (última versão estável da Docker image).
     volumes:
       - db_data:/var/lib/mysql
-    command: mysqld --default_authentication_plugin=mysql_native_password
-    environment:
-      TZ: America/Sao_Paulo
-      MYSQL_ROOT_PASSWORD: docker
+    command: mysqld --default_authentication_plugin=mysql_native_password // command que funciona de modo similar à instrução COMMAND do Dockerfile. No nosso estamos usando o command para inicializar o MySQL no modo de autenticação nativo. Sem isso não conseguiríamos logar no nosso SGBD MySQL.
+    environment:  // Environment como o próprio nome diz serve para definirmos valores de variáveis de ambiente dentro do contêiner.
+      TZ: America/Sao_Paulo  // A variável TZ serve para definirmos o TimeZone em que o contêiner está sendo executado.
+      MYSQL_ROOT_PASSWORD: docker  // A variável MYSQL_ROOT_PASSWORD é obrigatória e sua stack não irá subir sem ela. Ela é usada para definirmos a senha do usuário root do MySQL. 
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       MYSQL_DATABASE: wordpress
-    ports:
+    ports:  // portas de acesso.
       - 3308:3306
     networks:
       - wordpress-network
@@ -27,7 +27,7 @@ services:
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: docker
-    ports:
+    ports:  
       - 80:80
     networks:
       - wordpress-network
